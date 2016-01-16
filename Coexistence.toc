@@ -1,0 +1,8 @@
+## Interface: 40300
+## Title: Coexistence
+## Author: Lanrutcon
+## Version: 1.0
+## DefaultState: Enabled
+## Notes: WoD UnitFrames TextStatusBar 
+
+Coexistence.lua
