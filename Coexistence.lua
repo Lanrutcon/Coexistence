@@ -57,13 +57,19 @@ function TextStatusBar_UpdateTextStringWithValues(statusFrame, textString, value
 
 		local valueDisplay = value;
 		local valueMaxDisplay = valueMax;
-		local smallNum;
-		if (valueDisplay > 10000) then
+		
+		local smallNum = 0;
+		while (valueDisplay > 10000) do
 			valueDisplay = math.floor(valueDisplay/1000 + 0.5);
 			valueMaxDisplay = math.floor(valueMaxDisplay/1000 + 0.5);
-			smallNum = false;
-		else
-			smallNum = true;
+			smallNum = smallNum + 1;
+		end
+		if(smallNum == 1) then
+			valueDisplay = valueDisplay.."k";
+			valueMaxDisplay = valueMaxDisplay.."k";
+		elseif(smallNum == 2) then
+			valueDisplay = valueDisplay.."m";
+			valueMaxDisplay = valueMaxDisplay.."m";
 		end
 
 		if ( value and valueMax > 0 ) then
@@ -72,11 +78,7 @@ function TextStatusBar_UpdateTextStringWithValues(statusFrame, textString, value
 					statusFrame.LeftText:SetText(math.ceil((value / valueMax) * 100) .. "%");
 					statusFrame.LeftText:Show();
 				end
-				if(not smallNum) then
-					statusFrame.RightText:SetText(valueDisplay.."k");
-				else
-					statusFrame.RightText:SetText(valueDisplay);
-				end
+				statusFrame.RightText:SetText(valueDisplay);
 				statusFrame.RightText:Show();
 				textString:Hide();
 			else
