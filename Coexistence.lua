@@ -42,7 +42,7 @@ function TextStatusBar_UpdateTextStringWithValues(statusFrame, textString, value
 		statusFrame.RightText:Hide();
 	end
 	
-	if ( valueMax > 0 or tonumber(valueMax) ~= valueMax ) then
+	if ( ( tonumber(valueMax) ~= valueMax or valueMax > 0 ) and not ( statusFrame.pauseUpdates ) ) then
 		statusFrame:Show();
 
 		if ( (statusFrame.cvar and GetCVar(statusFrame.cvar) == "1" and statusFrame.textLockable) or statusFrame.forceShow ) then
